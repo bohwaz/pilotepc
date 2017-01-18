@@ -1,0 +1,6 @@
+/*!
+ * CachePilotePC
+ * global jQuery, window, document
+ * Minified 24/03/2013
+ */
+(function(d){var c=function(){try{window.applicationCache.swapCache();window.location.reload()}catch(f){}},a=function(){alert("Aucune mise à jour disponible.")},b={isOnline:function(f){var g={online:"Online",offline:"Offline"},f=d.extend({},g,f);return this.each(function(){if(navigator.onLine){d(this).addClass("navigatorOnline");d(this).removeClass("navigatorOffline");d(this).attr("title",f.online)}else{d(this).removeClass("navigatorOnline");d(this).addClass("navigatorOffline");d(this).attr("title",f.offline)}})},init:function(f){return this.each(function(){var g=window.applicationCache;if(g!="undefined"){if(g.addEventListener!="undefined"){g.addEventListener("updateready",c,false)}else{g.attachEvent("updateready",c,false)}}d(this).on("click",function(h){if(g!="undefined"){if(g.addEventListener!="undefined"){g.addEventListener("noupdate",a,false)}else{g.attachEvent("noupdate",a,false)}g.update()}})})}};d.fn.CachePilotePC=function e(){var g=arguments[0],f;if(b[g]){g=b[g];f=Array.prototype.slice.call(arguments,1)}else{if(typeof(g)=="object"||!g){g=b.init;f=arguments}else{d.error("Method "+g+" does not exist on jQuery.CachePilotePC");return this}}return g.apply(this,f)}}(jQuery));

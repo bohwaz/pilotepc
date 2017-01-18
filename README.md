@@ -3,6 +3,8 @@ Pilote PC — Outil d'aide au calcul de la prestation compensatoire (divorce)
 
 Miroir Github
 
+Mot de passe : estimationdelapc
+
 Source : http://pilotepc.free.fr/
 
 Documentation :

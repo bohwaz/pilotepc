@@ -1,0 +1,12 @@
+/*! BlobBuilder.js
+ * A BlobBuilder implementation.
+ * 2012-04-21
+ *
+ * By Eli Grey, http://eligrey.com
+ * License: X11/MIT
+ *   See LICENSE.md
+ */
+/*!global self, unescape */
+/*!jslint bitwise: true, regexp: true, confusion: true, es5: true, vars: true, white: true,
+  plusplus: true */
+var BlobBuilder=BlobBuilder||self.WebKitBlobBuilder||self.MozBlobBuilder||self.MSBlobBuilder||(function(k){var c=function(v){return Object.prototype.toString.call(v).match(/^\[object\s(.*)\]$/)[1]},u=function(){this.data=[]},t=function(x,v,w){this.data=x;this.size=x.length;this.type=v;this.encoding=w},l=u.prototype,s=t.prototype,o=k.FileReaderSync,a=function(v){this.code=this[this.name=v]},m=("NOT_FOUND_ERR SECURITY_ERR ABORT_ERR NOT_READABLE_ERR ENCODING_ERR NO_MODIFICATION_ALLOWED_ERR INVALID_STATE_ERR SYNTAX_ERR").split(" "),r=m.length,g=k.URL||k.webkitURL||k,p=g.createObjectURL,b=g.revokeObjectURL,e=g,j=k.btoa,f=k.atob,n=false,i=function(v){n=!v},d=k.ArrayBuffer,h=k.Uint8Array;u.fake=s.fake=true;while(r--){a.prototype[m[r]]=r+1}try{if(h){i.apply(0,new h(1))}}catch(q){}if(!g.createObjectURL){e=k.URL={}}e.createObjectURL=function(w){var x=w.type,v;if(x===null){x="application/octet-stream"}if(w instanceof t){v="data:"+x;if(w.encoding==="base64"){return v+";base64,"+w.data}else{if(w.encoding==="URI"){return v+","+decodeURIComponent(w.data)}}if(j){return v+";base64,"+j(w.data)}else{return v+","+encodeURIComponent(w.data)}}else{if(p){return p.call(g,w)}}};e.revokeObjectURL=function(v){if(v.substring(0,5)!=="data:"&&b){b.call(g,v)}};l.append=function(z){var B=this.data;if(h&&z instanceof d){if(n){B.push(String.fromCharCode.apply(String,new h(z)))}else{var A="",w=new h(z),x=0,y=w.length;for(;x<y;x++){A+=String.fromCharCode(w[x])}}}else{if(c(z)==="Blob"||c(z)==="File"){if(o){var v=new o;B.push(v.readAsBinaryString(z))}else{throw new a("NOT_READABLE_ERR")}}else{if(z instanceof t){if(z.encoding==="base64"&&f){B.push(f(z.data))}else{if(z.encoding==="URI"){B.push(decodeURIComponent(z.data))}else{if(z.encoding==="raw"){B.push(z.data)}}}}else{if(typeof z!=="string"){z+=""}B.push(unescape(encodeURIComponent(z)))}}}};l.getBlob=function(v){if(!arguments.length){v=null}return new t(this.data.join(""),v,"raw")};l.toString=function(){return"[object BlobBuilder]"};s.slice=function(y,v,x){var w=arguments.length;if(w<3){x=null}return new t(this.data.slice(y,w>1?v:this.data.length),x,this.encoding)};s.toString=function(){return"[object Blob]"};return u}(self));
